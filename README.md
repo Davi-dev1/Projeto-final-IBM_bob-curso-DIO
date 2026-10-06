@@ -13,7 +13,7 @@
 
 <div align="center">
 
-### 🔗 [https://davi-dev1.github.io/Projeto-final-IBM_bob-curso-DIO/](https://davi-dev1.github.io/Projeto-final-IBM_bob-curso-DIO/)
+### 🔗 [https://davi-dev1.github.io/Projeto-final-IBM_bob-curso-DIO/)
 
 **Clique no link acima para abrir a interface diretamente no navegador — sem instalação.**
 
