@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIO Explorer — IBM Bob × DIO</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2230;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #bc8cff;
+      --green: #3fb950;
+      --orange: #d29922;
+      --red: #f85149;
+      --gold: #e3b341;
+      --radius: 10px;
+      --transition: 0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; gap: 20px;
+      height: 58px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 17px; color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 500;
+      color: var(--muted); transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface2); text-decoration: none; }
+    .nav-links a.active { color: var(--accent); background: rgba(88,166,255,.1); }
+    .nav-gh {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 16px; border-radius: 7px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); font-size: 13px; font-weight: 600;
+      transition: var(--transition); margin-left: 4px;
+    }
+    .nav-gh:hover { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,.07); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center; padding: 80px 24px 60px;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(88,166,255,.08) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.25);
+      border-radius: 20px; padding: 5px 14px; font-size: 12px;
+      color: var(--accent); font-weight: 600; margin-bottom: 22px; letter-spacing: .4px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800;
+      background: linear-gradient(135deg, #e6edf3 30%, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.15; margin-bottom: 20px;
+    }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 36px; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      border: none; cursor: pointer; transition: var(--transition); text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0d1117;
+    }
+    .btn-primary:hover { background: #79c0ff; text-decoration: none; }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: flex; justify-content: center; gap: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: 680px; margin: 0 auto 70px; overflow: hidden;
+    }
+    .stat-item {
+      flex: 1; padding: 20px 10px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 64px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 44px; }
+    .section-header h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
+    .section-header p { color: var(--muted); max-width: 500px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block; margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--accent2); background: rgba(188,140,255,.1);
+      border: 1px solid rgba(188,140,255,.2); border-radius: 20px; padding: 3px 12px;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px; transition: var(--transition);
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* ── FEATURE CARDS ── */
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 14px;
+    }
+    .feature-icon.blue { background: rgba(88,166,255,.12); }
+    .feature-icon.purple { background: rgba(188,140,255,.12); }
+    .feature-icon.green { background: rgba(63,185,80,.12); }
+    .feature-icon.gold { background: rgba(227,179,65,.12); }
+    .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── COMMAND DEMO ── */
+    .demo-section { background: var(--surface); }
+    .demo-tabs { display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap; }
+    .demo-tab {
+      padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 600;
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      cursor: pointer; transition: var(--transition);
+    }
+    .demo-tab.active { background: var(--accent); border-color: var(--accent); color: #0d1117; }
+    .demo-tab:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+    .demo-panel { display: none; }
+    .demo-panel.active { display: block; }
+    .terminal {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .terminal-bar {
+      background: var(--surface2); padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #28c840; }
+    .terminal-label { font-size: 12px; color: var(--muted); margin-left: 8px; }
+    .terminal-body { padding: 20px; font-family: "Cascadia Code", "Fira Code", "Consolas", monospace; font-size: 13px; line-height: 1.8; overflow-x: auto; }
+    .t-prompt { color: var(--green); }
+    .t-cmd { color: var(--accent); }
+    .t-comment { color: var(--muted); }
+    .t-key { color: var(--accent2); }
+    .t-val { color: #a5d6ff; }
+    .t-str { color: #a8ff78; }
+    .t-badge { color: var(--gold); }
+    .t-warn { color: var(--orange); }
+    .t-head { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border); display: block; padding-bottom: 6px; margin-bottom: 10px; }
+
+    /* ── TRILHAS EXPLORER ── */
+    .search-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .search-input {
+      flex: 1; min-width: 200px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 10px 16px; font-size: 14px;
+      outline: none; transition: var(--transition);
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { border-color: var(--accent); }
+    .filter-select {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 10px 14px; font-size: 14px;
+      cursor: pointer; outline: none;
+    }
+    .filter-select:focus { border-color: var(--accent); }
+
+    .trilha-card { cursor: pointer; }
+    .trilha-card .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .trilha-card h3 { font-size: 14px; font-weight: 700; line-height: 1.4; flex: 1; }
+    .badge-nivel {
+      font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap; text-transform: uppercase; letter-spacing: .4px;
+    }
+    .nivel-iniciante { background: rgba(63,185,80,.15); color: var(--green); border: 1px solid rgba(63,185,80,.25); }
+    .nivel-intermediario { background: rgba(227,179,65,.15); color: var(--gold); border: 1px solid rgba(227,179,65,.25); }
+    .nivel-avancado { background: rgba(248,81,73,.15); color: var(--red); border: 1px solid rgba(248,81,73,.25); }
+
+    .trilha-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+    .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+    .meta-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tech-tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 4px;
+      background: rgba(88,166,255,.1); color: var(--accent);
+      border: 1px solid rgba(88,166,255,.2);
+    }
+    .promo-strip {
+      margin-top: 12px; padding: 8px 12px; border-radius: 6px;
+      background: rgba(63,185,80,.07); border: 1px solid rgba(63,185,80,.2);
+      font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; max-width: 640px; width: 100%; max-height: 90vh;
+      overflow-y: auto; padding: 28px;
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; gap: 12px; }
+    .modal-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
+    .modal-close {
+      background: none; border: none; color: var(--muted); font-size: 22px;
+      cursor: pointer; line-height: 1; flex-shrink: 0; padding: 2px 6px;
+      border-radius: 5px; transition: var(--transition);
+    }
+    .modal-close:hover { background: var(--surface2); color: var(--text); }
+    .modal-section { margin-bottom: 18px; }
+    .modal-section h4 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; }
+    .badges-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; padding: 5px 12px; border-radius: 20px;
+      background: rgba(227,179,65,.1); border: 1px solid rgba(227,179,65,.2); color: var(--gold);
+    }
+    .lives-list { display: flex; flex-direction: column; gap: 10px; }
+    .live-item {
+      padding: 12px; background: var(--surface2); border-radius: 8px;
+      border: 1px solid var(--border); font-size: 13px;
+    }
+    .live-item strong { display: block; margin-bottom: 4px; }
+    .live-item span { color: var(--muted); font-size: 12px; }
+
+    /* ── ARCHITECTURE ── */
+    .arch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .arch-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .arch-card .arch-icon { font-size: 28px; margin-bottom: 12px; }
+    .arch-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    .arch-card p { font-size: 12px; color: var(--muted); }
+    .arch-card ul { list-style: none; margin-top: 8px; }
+    .arch-card ul li { font-size: 12px; color: var(--muted); padding: 2px 0; padding-left: 12px; position: relative; }
+    .arch-card ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 2px; }
+
+    /* ── TESTS ── */
+    .tests-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 600px) { .tests-grid { grid-template-columns: 1fr; } }
+    .test-suite {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--green); border-radius: var(--radius); padding: 16px;
+    }
+    .test-suite h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .test-suite .suite-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .suite-count {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(63,185,80,.15); color: var(--green);
+      font-size: 11px; font-weight: 700;
+    }
+
+    /* ── METRICS ── */
+    .metrics-bar { margin-top: 30px; }
+    .metric-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .metric-label { font-size: 13px; color: var(--muted); min-width: 100px; }
+    .metric-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 8px; overflow: hidden; }
+    .metric-fill { height: 100%; border-radius: 4px; background: var(--green); }
+    .metric-val { font-size: 13px; font-weight: 700; min-width: 40px; text-align: right; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+    footer .footer-grid {
+      display: flex; justify-content: center; gap: 32px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    footer .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text); margin-bottom: 10px; }
+    footer .footer-col a { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    footer .footer-col a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { padding: 60px 16px 44px; }
+      .stats-row { flex-wrap: wrap; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); min-width: 50%; }
+      .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+      nav { padding: 0 14px; }
+      .nav-links { display: none; }
+      section { padding: 44px 16px; }
+    }
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+
+    /* ── CERT PREVIEW ── */
+    .cert-box {
+      background: #010409; border: 2px solid var(--gold);
+      border-radius: 12px; padding: 28px; font-family: monospace; font-size: 12px;
+      line-height: 1.7; color: var(--text); white-space: pre-wrap; overflow-x: auto;
+    }
+    .cert-box .cert-gold { color: var(--gold); }
+    .cert-box .cert-cyan { color: var(--accent); }
+    .cert-box .cert-green { color: var(--green); }
+    .cert-box .cert-muted { color: var(--muted); }
+
+    /* ── SCROLL INDICATOR ── */
+    #no-results { display: none; text-align: center; padding: 44px 0; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="7" fill="#58a6ff" opacity=".15"/>
+      <text x="5" y="20" font-size="16" fill="#58a6ff" font-weight="800">D</text>
+    </svg>
+    DIO Explorer
+  </div>
+  <div class="nav-links">
+    <a href="#features" class="active">Features</a>
+    <a href="#demo">Demo</a>
+    <a href="#trilhas">Trilhas</a>
+    <a href="#arquitetura">Arquitetura</a>
+    <a href="#testes">Testes</a>
+  </div>
+  <a class="nav-gh" href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    GitHub
+  </a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="#58a6ff"><circle cx="6" cy="6" r="5" stroke="#58a6ff" stroke-width="2" fill="none"/><circle cx="6" cy="6" r="2" fill="#58a6ff"/></svg>
+    Projeto Final IBM Bob × DIO
+  </div>
+  <h1>Explore trilhas, desafios<br>e certificados DIO</h1>
+  <p>Integração completa entre IBM Bob, comandos personalizados, skills e um servidor MCP em TypeScript — tudo com 99% de cobertura de testes.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#trilhas">Explorar Trilhas</a>
+    <a class="btn btn-outline" href="#demo">Ver Demo</a>
+    <a class="btn btn-outline" href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Repositório
+    </a>
+  </div>
+</header>
+
+<!-- STATS -->
+<div style="padding: 0 24px 0; max-width: 700px; margin: 0 auto;">
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Trilhas</div></div>
+    <div class="stat-item"><div class="stat-num">53</div><div class="stat-label">Testes</div></div>
+    <div class="stat-item"><div class="stat-num">99%</div><div class="stat-label">Cobertura</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">MCP Tools</div></div>
+    <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Modos de Uso</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" style="padding-top: 80px;">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">Funcionalidades</span>
+      <h2>Tudo em um só projeto</h2>
+      <p>Três camadas de acesso às mesmas funcionalidades: slash commands, skills e servidor MCP.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="feature-icon blue">🔍</div>
+        <h3>Busca de Trilhas</h3>
+        <p>Pesquise o catálogo completo de trilhas DIO por tecnologia. Retorna plano de estudos, módulos, XP, badges e lives ao vivo.</p>
+        <div style="margin-top: 14px;">
+          <code style="font-size: 12px; background: var(--surface2); padding: 4px 10px; border-radius: 5px; color: var(--accent);">/trilha Java</code>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon purple">⚡</div>
+        <h3>Geração de Desafios</h3>
+        <p>Gera desafios de código criativos com descrição, exemplos de E/S, template inicial, critérios de avaliação, XP e badge desbloqueável.</p>
+        <div style="margin-top: 14px;">
+          <code style="font-size: 12px; background: var(--surface2); padding: 4px 10px; border-radius: 5px; color: var(--accent2);">/desafio Python intermediário</code>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon gold">🏆</div>
+        <h3>Emissão de Certificados</h3>
+        <p>Emite certificados com dados reais da trilha, competências adquiridas, badges conquistadas e código de verificação único.</p>
+        <div style="margin-top: 14px;">
+          <code style="font-size: 12px; background: var(--surface2); padding: 4px 10px; border-radius: 5px; color: var(--gold);">/certificado "Ana Silva" "React"</code>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon green">🔌</div>
+        <h3>Servidor MCP TypeScript</h3>
+        <p>3 tools, 2 resources, 1 prompt via protocolo MCP. Suporte a stdio, HTTP, HTTPS/TLS e OAuth 2.0 Authorization Code Flow.</p>
+        <div style="margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="tech-tag">Node.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Express</span><span class="tech-tag">JWT</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon blue">🧪</div>
+        <h3>Testes Unitários Python</h3>
+        <p>53 testes, 99% de cobertura de código com pytest. 10 suites cobrindo todos os fluxos, incluindo casos de borda e dados mock.</p>
+        <div style="margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="tech-tag">pytest</span><span class="tech-tag">pytest-cov</span><span class="tech-tag">Python 3.13</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon purple">🤖</div>
+        <h3>IBM Bob Skills & Commands</h3>
+        <p>Slash commands e skills com frontmatter YAML versionáveis no Git. Invocação automática pelo Bob via <code style="font-size: 11px;">disable-model-invocation</code>.</p>
+        <div style="margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="tech-tag">IBM Bob</span><span class="tech-tag">MCP SDK</span><span class="tech-tag">Zod</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" class="demo-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">Demo Interativa</span>
+      <h2>Veja o projeto em ação</h2>
+      <p>Explore as saídas dos comandos e do servidor MCP diretamente aqui.</p>
+    </div>
+
+    <div class="demo-tabs">
+      <button class="demo-tab active" onclick="showTab('trilha')">/ trilha</button>
+      <button class="demo-tab" onclick="showTab('desafio')">/ desafio</button>
+      <button class="demo-tab" onclick="showTab('certificado')">/ certificado</button>
+      <button class="demo-tab" onclick="showTab('mcp')">MCP HTTP</button>
+      <button class="demo-tab" onclick="showTab('testes')">pytest</button>
+    </div>
+
+    <!-- TRILHA -->
+    <div id="tab-trilha" class="demo-panel active">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-label">IBM Bob — chat</span>
+        </div>
+        <div class="terminal-body">
+<span class="t-prompt">Você › </span><span class="t-cmd">/trilha Java</span>
+
+<span class="t-head">📚 TRILHA ENCONTRADA</span>
+<span class="t-key">Nome:</span>        <span class="t-val">Formação Full Stack Java + Angular</span>
+<span class="t-key">Nível:</span>       <span class="t-badge">Intermediário</span>
+<span class="t-key">Módulos:</span>     <span class="t-val">12</span>
+<span class="t-key">XP Total:</span>    <span class="t-val">18.500 XP</span>
+<span class="t-key">Vitalício:</span>   <span class="t-str">✅ Sim</span>
+
+<span class="t-head">🏅 BADGES DISPONÍVEIS</span>
+  <span class="t-badge">⭐ Java Developer</span>
+  <span class="t-badge">⭐ Spring Boot Expert</span>
+  <span class="t-badge">⭐ Angular Professional</span>
+  <span class="t-badge">⭐ Full Stack Badge</span>
+  <span class="t-badge">⭐ API REST Master</span>
+
+<span class="t-head">📡 LIVES AO VIVO</span>
+  <span class="t-val">• Construindo uma API REST com Spring Boot</span>
+    <span class="t-muted">  2025-07-10 · Gleyson Sampaio</span>
+  <span class="t-val">• Deploy de aplicações Angular na Vercel</span>
+    <span class="t-muted">  2025-07-24 · Renan Johannsen</span>
+
+<span class="t-head">🎉 PROMOÇÃO ATIVA</span>
+  <span class="t-str">30% de desconto!</span>  Cupom: <span class="t-badge">FULLSTACK30</span>  Válido até: <span class="t-val">2025-12-31</span></div>
+      </div>
+    </div>
+
+    <!-- DESAFIO -->
+    <div id="tab-desafio" class="demo-panel">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-label">IBM Bob — chat</span>
+        </div>
+        <div class="terminal-body">
+<span class="t-prompt">Você › </span><span class="t-cmd">/desafio Python intermediário</span>
+
+<span class="t-head">⚡ DESAFIO: Analisador de Logs de Sistema</span>
+<span class="t-key">Tecnologia:</span>  <span class="t-val">Python</span>
+<span class="t-key">Nível:</span>       <span class="t-badge">Intermediário</span>
+<span class="t-key">XP:</span>          <span class="t-val">+2.400 XP ao completar</span>
+
+<span class="t-head">📋 DESCRIÇÃO</span>
+Implemente um analisador de logs que leia um arquivo de texto com
+entradas no formato <span class="t-str">[LEVEL] TIMESTAMP MESSAGE</span> e retorne estatísticas
+agrupadas por nível (INFO, WARN, ERROR).
+
+<span class="t-head">▶ EXEMPLO DE ENTRADA</span>
+<span class="t-str">[INFO]  2025-07-01 10:00:01 Servidor iniciado
+[ERROR] 2025-07-01 10:01:15 Conexão recusada: timeout
+[WARN]  2025-07-01 10:02:30 Memória acima de 80%</span>
+
+<span class="t-head">◀ EXEMPLO DE SAÍDA</span>
+<span class="t-str">{"INFO": 1, "WARN": 1, "ERROR": 1, "total": 3}</span>
+
+<span class="t-head">🏅 RECOMPENSA</span>
+  <span class="t-badge">⭐ Badge: Python Data Analyst desbloqueada!</span></div>
+      </div>
+    </div>
+
+    <!-- CERTIFICADO -->
+    <div id="tab-certificado" class="demo-panel">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-label">IBM Bob — chat</span>
+        </div>
+        <div class="terminal-body">
+<span class="t-prompt">Você › </span><span class="t-cmd">/certificado "Ana Silva" "React"</span>
+
+<div class="cert-box">
+<span class="cert-gold">╔══════════════════════════════════════════════════════╗
+║         DIGITAL INNOVATION ONE — CERTIFICADO         ║
+╠══════════════════════════════════════════════════════╣</span>
+<span class="cert-cyan">║  Certificamos que                                    ║
+║                                                      ║
+║          ★  ANA SILVA  ★                            ║
+║                                                      ║
+║  concluiu com êxito a trilha de aprendizagem:        ║
+║                                                      ║
+║       Formação Front-End com React                   ║</span>
+<span class="cert-green">║                                                      ║
+║  Módulos: 9        XP Total: 13.800       Nível: ★★  ║
+║  Data de conclusão: 2025-07-09                       ║</span>
+<span class="cert-muted">║                                                      ║
+║  Verificação: DIO-2025-A8C3F921                      ║
+║  dio.me/verify/DIO-2025-A8C3F921                     ║</span>
+<span class="cert-gold">╚══════════════════════════════════════════════════════╝</span></div></div>
+      </div>
+    </div>
+
+    <!-- MCP HTTP -->
+    <div id="tab-mcp" class="demo-panel">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-label">Terminal — curl</span>
+        </div>
+        <div class="terminal-body">
+<span class="t-comment"># 1. Gerar API Key</span>
+<span class="t-prompt">$ </span><span class="t-cmd">node build/setup-api-key.js</span>
+<span class="t-str">✔ API Key gerada: dio_abc123xyz...</span>
+<span class="t-str">✔ .env criado com sucesso.</span>
+
+<span class="t-comment"># 2. Iniciar servidor HTTP</span>
+<span class="t-prompt">$ </span><span class="t-cmd">npm run start:http</span>
+<span class="t-str">🚀 DIO Explorer MCP — HTTP mode
+   Porta: 3000  |  Auth: API Key  |  Trilhas: 20 carregadas</span>
+
+<span class="t-comment"># 3. Chamar a tool trilha_buscar</span>
+<span class="t-prompt">$ </span><span class="t-cmd">curl -X POST http://localhost:3000/mcp \</span>
+     <span class="t-val">-H "Authorization: Bearer dio_abc123xyz" \</span>
+     <span class="t-val">-H "Content-Type: application/json" \</span>
+     <span class="t-val">-d '{"method":"tools/call","params":{"name":"trilha_buscar","arguments":{"tecnologia":"AWS"}}}'</span>
+
+<span class="t-comment"># Resposta:</span>
+<span class="t-str">{
+  "result": {
+    "nome": "Formação DevOps &amp; Cloud AWS",
+    "nivel": "Avançado",
+    "xp_total": 22000,
+    "badges": ["AWS Cloud Practitioner", "Docker Captain", "Kubernetes Operator", ...],
+    "promocao": { "desconto": 35, "cupom": "DEVOPS35" }
+  }
+}</span></div>
+      </div>
+    </div>
+
+    <!-- TESTES -->
+    <div id="tab-testes" class="demo-panel">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-label">Terminal — pytest</span>
+        </div>
+        <div class="terminal-body">
+<span class="t-prompt">$ </span><span class="t-cmd">python -m pytest test_dio_commands.py -v --cov=dio_commands</span>
+
+<span class="t-str">collected 53 items</span>
+
+<span class="t-str">test_dio_commands.py::TestLoadTrilhas::test_load_valid_file                    PASSED
+test_dio_commands.py::TestBuscarTrilhasPorTecnologia::test_buscar_java         PASSED
+test_dio_commands.py::TestFormatarTrilha::test_formatar_nivel_iniciante        PASSED
+test_dio_commands.py::TestComandoTrilha::test_trilha_encontrada               PASSED
+test_dio_commands.py::TestComandoDesafio::test_desafio_iniciante              PASSED
+test_dio_commands.py::TestComandoDesafio::test_desafio_intermediario          PASSED
+test_dio_commands.py::TestComandoDesafio::test_desafio_avancado               PASSED
+test_dio_commands.py::TestComandoCertificado::test_certificado_emitido        PASSED
+</span><span class="t-comment">... (53 testes no total)</span>
+
+<span class="t-head">============================== COVERAGE REPORT ==============================</span>
+<span class="t-key">Name                  Stmts   Miss  Cover</span>
+<span class="t-str">dio_commands.py         148      1    99%</span>
+
+<span class="t-str">============ </span><span class="t-badge">53 passed</span><span class="t-str"> in 0.31s — </span><span class="t-badge">Coverage: 99%</span><span class="t-str"> ✅ ============</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRILHAS EXPLORER -->
+<section id="trilhas">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">Catálogo</span>
+      <h2>Explorar Trilhas</h2>
+      <p>Pesquise e filtre as trilhas disponíveis no catálogo DIO. Clique em uma trilha para ver detalhes.</p>
+    </div>
+
+    <div class="search-row">
+      <input type="text" class="search-input" id="searchInput" placeholder="Buscar por nome ou tecnologia..." oninput="filterTrilhas()" />
+      <select class="filter-select" id="nivelFilter" onchange="filterTrilhas()">
+        <option value="">Todos os níveis</option>
+        <option value="Iniciante">Iniciante</option>
+        <option value="Intermediário">Intermediário</option>
+        <option value="Avançado">Avançado</option>
+      </select>
+    </div>
+
+    <div class="cards-grid" id="trilhasGrid"></div>
+    <div id="no-results">Nenhuma trilha encontrada para os filtros selecionados.</div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="modal-close" onclick="closeModalDirect()">×</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ARQUITETURA -->
+<section id="arquitetura" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">Arquitetura</span>
+      <h2>Stack e Camadas</h2>
+      <p>Separação clara entre dados, lógica, protocolo e interface — fácil de testar e evoluir.</p>
+    </div>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-icon">📂</div>
+        <h3>Camada de Dados</h3>
+        <p>Catálogo JSON com 20+ trilhas carregado uma vez em memória.</p>
+        <ul>
+          <li>trilhas dio.json</li>
+          <li>Schema validado</li>
+          <li>Busca case-insensitive</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🐍</div>
+        <h3>Python Core</h3>
+        <p>Lógica de domínio em Python com 99% de cobertura por pytest.</p>
+        <ul>
+          <li>dio_commands.py</li>
+          <li>53 testes unitários</li>
+          <li>10 suites completas</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🤖</div>
+        <h3>IBM Bob Layer</h3>
+        <p>Slash commands e skills com frontmatter YAML versionáveis no Git.</p>
+        <ul>
+          <li>/trilha /desafio /certificado</li>
+          <li>Skills auto-invocáveis</li>
+          <li>disable-model-invocation</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">⚙️</div>
+        <h3>MCP Server (TS)</h3>
+        <p>Servidor em TypeScript com 3 tools, 2 resources e 1 prompt.</p>
+        <ul>
+          <li>stdio + HTTP + HTTPS</li>
+          <li>API Key + JWT OAuth</li>
+          <li>Express + Zod</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🔐</div>
+        <h3>Segurança</h3>
+        <p>Autenticação em múltiplas camadas para ambientes de produção.</p>
+        <ul>
+          <li>API Key Bearer</li>
+          <li>OAuth 2.0 + PKCE</li>
+          <li>JWT HS256 + revogação</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🚀</div>
+        <h3>Deploy Ready</h3>
+        <p>Configurável via variáveis de ambiente para qualquer infra.</p>
+        <ul>
+          <li>Modo stdio (Bob nativo)</li>
+          <li>Modo HTTP (staging)</li>
+          <li>Modo HTTPS/TLS (prod)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTES -->
+<section id="testes">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">Qualidade</span>
+      <h2>Testes Unitários</h2>
+      <p>53 testes, 0 falhas, 99% de cobertura — qualidade de testes não depende de quem escreveu o código.</p>
+    </div>
+
+    <div class="metrics-bar" style="max-width: 480px; margin: 0 auto 40px;">
+      <div class="metric-row">
+        <span class="metric-label">Aprovados</span>
+        <div class="metric-track"><div class="metric-fill" style="width:100%;"></div></div>
+        <span class="metric-val" style="color: var(--green);">53/53</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Cobertura</span>
+        <div class="metric-track"><div class="metric-fill" style="width:99%;"></div></div>
+        <span class="metric-val" style="color: var(--green);">99%</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Falhas</span>
+        <div class="metric-track"><div class="metric-fill" style="width:0%; background: var(--red);"></div></div>
+        <span class="metric-val" style="color: var(--muted);">0</span>
+      </div>
+    </div>
+
+    <div class="tests-grid">
+      <div class="test-suite"><h4>TestLoadTrilhas</h4><div class="suite-meta"><span class="suite-count">3</span> testes — carga do JSON, arquivo inválido, campo ausente</div></div>
+      <div class="test-suite"><h4>TestBuscarTrilhasPorTecnologia</h4><div class="suite-meta"><span class="suite-count">6</span> testes — busca positiva, negativa, case-insensitive</div></div>
+      <div class="test-suite"><h4>TestFormatarTrilha</h4><div class="suite-meta"><span class="suite-count">10</span> testes — todos os campos, promoção, vitalício</div></div>
+      <div class="test-suite"><h4>TestComandoTrilha</h4><div class="suite-meta"><span class="suite-count">3</span> testes — encontrada, não encontrada, parcial</div></div>
+      <div class="test-suite"><h4>TestComandoDesafio</h4><div class="suite-meta"><span class="suite-count">9</span> testes — iniciante, intermediário, avançado, edge cases</div></div>
+      <div class="test-suite"><h4>TestFormatarDesafio</h4><div class="suite-meta"><span class="suite-count">3</span> testes — formato de saída, XP, badge</div></div>
+      <div class="test-suite"><h4>TestBuscarTrilhaPorNome</h4><div class="suite-meta"><span class="suite-count">4</span> testes — nome exato, parcial, não encontrado</div></div>
+      <div class="test-suite"><h4>TestComandoCertificado</h4><div class="suite-meta"><span class="suite-count">8</span> testes — emissão, código único, trilha não encontrada</div></div>
+      <div class="test-suite"><h4>TestFormatarCertificado</h4><div class="suite-meta"><span class="suite-count">4</span> testes — ASCII art, campos, data, verificação</div></div>
+      <div class="test-suite"><h4>TestHelpers</h4><div class="suite-meta"><span class="suite-count">3</span> testes — utilitários, formatação de XP, slugify</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align: center; background: var(--surface); padding: 60px 24px;">
+  <div style="max-width: 560px; margin: 0 auto;">
+    <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 14px;">Pronto para explorar?</h2>
+    <p style="color: var(--muted); margin-bottom: 28px;">Acesse o repositório, leia o README completo e siga os próximos passos para instalar o servidor MCP no IBM Bob.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a class="btn btn-primary" href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO" target="_blank" rel="noopener">
+        Ver no GitHub
+      </a>
+      <a class="btn btn-outline" href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO#5-servidor-mcp" target="_blank" rel="noopener">
+        Docs do MCP
+      </a>
+      <a class="btn btn-outline" href="https://dio.me" target="_blank" rel="noopener">
+        Acessar a DIO
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Comandos</h4>
+      <a href="#demo">/trilha</a>
+      <a href="#demo">/desafio</a>
+      <a href="#demo">/certificado</a>
+    </div>
+    <div class="footer-col">
+      <h4>Técnico</h4>
+      <a href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO" target="_blank" rel="noopener">Repositório</a>
+      <a href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO#5-servidor-mcp" target="_blank" rel="noopener">Servidor MCP</a>
+      <a href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO#8-testes-unitários" target="_blank" rel="noopener">Testes</a>
+    </div>
+    <div class="footer-col">
+      <h4>Links</h4>
+      <a href="https://dio.me" target="_blank" rel="noopener">DIO</a>
+      <a href="https://ibm.com" target="_blank" rel="noopener">IBM</a>
+      <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">MCP Protocol</a>
+    </div>
+  </div>
+  <div style="border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px;">
+    Projeto Final desenvolvido com <a href="https://ibm.com">IBM Bob</a> durante o curso
+    <a href="https://dio.me">Digital Innovation One</a> ·
+    <a href="https://github.com/DaviRios/Projeto-final-IBM_bob-curso-DIO" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // ── TRILHAS DATA (embedded from trilhas dio.json) ──
+  const TRILHAS = [
+    { id:1, nome:"Formação Full Stack Java + Angular", tecnologia:["Java","Spring Boot","Angular","TypeScript","PostgreSQL"], nivel:"Intermediário", numero_de_modulos:12, xp_total:18500, badges_disponiveis:["Java Developer","Spring Boot Expert","Angular Professional","Full Stack Badge","API REST Master"], promocoes:{desconto_percentual:30,validade:"2025-12-31",cupom:"FULLSTACK30"}, vitalicio:true, lives_ao_vivo:[{titulo:"Construindo uma API REST com Spring Boot",data:"2025-07-10",instrutor:"Gleyson Sampaio"},{titulo:"Deploy de aplicações Angular na Vercel",data:"2025-07-24",instrutor:"Renan Johannsen"}] },
+    { id:2, nome:"Formação Python para Data Science", tecnologia:["Python","Pandas","NumPy","Scikit-learn","Jupyter Notebook"], nivel:"Iniciante", numero_de_modulos:10, xp_total:14200, badges_disponiveis:["Python Starter","Data Analyst","Machine Learning Practitioner","Pandas Expert","Jupyter Pro"], promocoes:{desconto_percentual:25,validade:"2025-09-30",cupom:"DATASCIENCE25"}, vitalicio:true, lives_ao_vivo:[{titulo:"Análise Exploratória de Dados com Pandas",data:"2025-07-15",instrutor:"Luciana Pinto"},{titulo:"Machine Learning do Zero com Scikit-learn",data:"2025-08-05",instrutor:"Felipe Aguiar"}] },
+    { id:3, nome:"Formação Front-End com React", tecnologia:["React","JavaScript","CSS3","HTML5","Redux","Next.js"], nivel:"Intermediário", numero_de_modulos:9, xp_total:13800, badges_disponiveis:["React Developer","JavaScript Pro","Next.js Expert","Redux Master","UI/UX Frontend Badge"], promocoes:{desconto_percentual:20,validade:"2025-10-15",cupom:"REACT20"}, vitalicio:false, lives_ao_vivo:[{titulo:"Criando componentes reutilizáveis com React",data:"2025-07-18",instrutor:"Michele Ambrosio"}] },
+    { id:4, nome:"Formação DevOps & Cloud AWS", tecnologia:["AWS","Docker","Kubernetes","Terraform","CI/CD","Linux"], nivel:"Avançado", numero_de_modulos:14, xp_total:22000, badges_disponiveis:["AWS Cloud Practitioner","Docker Captain","Kubernetes Operator","Terraform Builder","DevOps Champion","Pipeline Engineer"], promocoes:{desconto_percentual:35,validade:"2025-11-30",cupom:"DEVOPS35"}, vitalicio:true, lives_ao_vivo:[{titulo:"Criando clusters Kubernetes na AWS",data:"2025-07-22",instrutor:"Sandeco Macedo"},{titulo:"Infraestrutura como Código com Terraform",data:"2025-08-12",instrutor:"Elidiana Andrade"},{titulo:"Pipeline CI/CD com GitHub Actions",data:"2025-09-03",instrutor:"Venilton FalvoJr"}] },
+    { id:5, nome:"Formação .NET C# Developer", tecnologia:["C#",".NET 8","ASP.NET Core","Entity Framework","SQL Server"], nivel:"Intermediário", numero_de_modulos:11, xp_total:16300, badges_disponiveis:["C# Developer",".NET Expert","ASP.NET Core Pro","Entity Framework Master","Backend .NET Badge"], promocoes:{desconto_percentual:0,validade:null,cupom:null}, vitalicio:true, lives_ao_vivo:[{titulo:"Criando APIs modernas com ASP.NET Core 8",data:"2025-07-29",instrutor:"Giuliana Bezerra"},{titulo:"ORM com Entity Framework Core na prática",data:"2025-08-19",instrutor:"Renan Johannsen"}] },
+    { id:6, nome:"Formação Mobile Android com Kotlin", tecnologia:["Kotlin","Android SDK","Jetpack Compose","Firebase","Room DB"], nivel:"Intermediário", numero_de_modulos:10, xp_total:15600, badges_disponiveis:["Kotlin Developer","Android Professional","Jetpack Compose Expert","Firebase Integrator","Mobile Dev Badge"], promocoes:{desconto_percentual:15,validade:"2025-08-31",cupom:"KOTLIN15"}, vitalicio:true, lives_ao_vivo:[{titulo:"Primeiro app completo com Jetpack Compose",data:"2025-07-31",instrutor:"Natalia Natalia"}] },
+    { id:7, nome:"Formação iOS com Swift e SwiftUI", tecnologia:["Swift","SwiftUI","Xcode","Core Data","CloudKit"], nivel:"Avançado", numero_de_modulos:11, xp_total:17900, badges_disponiveis:["Swift Developer","SwiftUI Expert","iOS Professional","Apple Ecosystem Badge","Core Data Master"], promocoes:{desconto_percentual:20,validade:"2025-10-01",cupom:"IOS20"}, vitalicio:false, lives_ao_vivo:[{titulo:"Construindo apps iOS modernos com SwiftUI",data:"2025-08-07",instrutor:"André Oporto"},{titulo:"Persistência de dados com Core Data",data:"2025-09-10",instrutor:"Felipe Aguiar"}] },
+    { id:8, nome:"Formação Inteligência Artificial com Python", tecnologia:["Python","TensorFlow","Keras","PyTorch","OpenCV"], nivel:"Avançado", numero_de_modulos:13, xp_total:21500, badges_disponiveis:["AI Practitioner","Deep Learning Expert","TensorFlow Pro","PyTorch Master","Computer Vision Badge","Neural Network Architect"], promocoes:{desconto_percentual:40,validade:"2025-07-31",cupom:"AI40"}, vitalicio:true, lives_ao_vivo:[{titulo:"Redes Neurais com TensorFlow do zero",data:"2025-07-14",instrutor:"Luciana Pinto"},{titulo:"Visão Computacional com OpenCV",data:"2025-08-25",instrutor:"Sandeco Macedo"}] },
+    { id:9, nome:"Formação SQL e Banco de Dados Relacional", tecnologia:["SQL","MySQL","PostgreSQL","Oracle DB","SQL Server"], nivel:"Iniciante", numero_de_modulos:8, xp_total:11000, badges_disponiveis:["SQL Beginner","Database Designer","Query Optimizer","DBA Junior Badge"], promocoes:{desconto_percentual:10,validade:"2025-09-15",cupom:"SQL10"}, vitalicio:true, lives_ao_vivo:[{titulo:"SQL para iniciantes: consultas essenciais",data:"2025-07-17",instrutor:"Elidiana Andrade"}] },
+    { id:10, nome:"Formação NoSQL com MongoDB e Redis", tecnologia:["MongoDB","Redis","Cassandra","DynamoDB","Node.js"], nivel:"Intermediário", numero_de_modulos:9, xp_total:13200, badges_disponiveis:["NoSQL Developer","MongoDB Expert","Redis Caching Pro","Distributed DB Badge"], promocoes:{desconto_percentual:25,validade:"2025-11-01",cupom:"NOSQL25"}, vitalicio:false, lives_ao_vivo:[{titulo:"Modelagem de dados no MongoDB Atlas",data:"2025-08-02",instrutor:"Giuliana Bezerra"},{titulo:"Cache de alta performance com Redis",data:"2025-09-16",instrutor:"Gleyson Sampaio"}] },
+    { id:11, nome:"Formação Segurança da Informação", tecnologia:["Kali Linux","Metasploit","Wireshark","OWASP","Nmap"], nivel:"Avançado", numero_de_modulos:12, xp_total:20000, badges_disponiveis:["Ethical Hacker","Pentester Pro","OWASP Defender","Network Security Badge","Cybersecurity Expert"], promocoes:{desconto_percentual:30,validade:"2025-10-31",cupom:"SEC30"}, vitalicio:true, lives_ao_vivo:[{titulo:"Pentest Web com OWASP Top 10",data:"2025-07-26",instrutor:"Venilton FalvoJr"},{titulo:"Análise de tráfego com Wireshark",data:"2025-08-30",instrutor:"Sandeco Macedo"}] },
+    { id:12, nome:"Formação Node.js e Microsserviços", tecnologia:["Node.js","Express","NestJS","RabbitMQ","Docker","gRPC"], nivel:"Intermediário", numero_de_modulos:11, xp_total:16800, badges_disponiveis:["Node.js Developer","NestJS Expert","Microservices Architect","RabbitMQ Integrator","gRPC Pro"], promocoes:{desconto_percentual:20,validade:"2025-12-15",cupom:"NODE20"}, vitalicio:true, lives_ao_vivo:[{titulo:"Arquitetura de microsserviços com NestJS",data:"2025-07-20",instrutor:"Michele Ambrosio"}] },
+    { id:13, nome:"Formação Vue.js do Básico ao Avançado", tecnologia:["Vue.js","Vuex","Pinia","Nuxt.js","TypeScript"], nivel:"Intermediário", numero_de_modulos:8, xp_total:12500, badges_disponiveis:["Vue.js Developer","Pinia State Manager","Nuxt.js SSR Expert","Frontend Vue Badge"], promocoes:{desconto_percentual:15,validade:"2025-09-01",cupom:"VUE15"}, vitalicio:false, lives_ao_vivo:[{titulo:"Estado global com Pinia",data:"2025-08-10",instrutor:"Michele Ambrosio"}] },
+    { id:14, nome:"Formação Go Lang: Back-End Moderno", tecnologia:["Go","Gin","GORM","gRPC","Redis"], nivel:"Intermediário", numero_de_modulos:10, xp_total:15100, badges_disponiveis:["Go Developer","Gin Web Expert","GORM Master","Concurrency Pro"], promocoes:{desconto_percentual:0,validade:null,cupom:null}, vitalicio:true, lives_ao_vivo:[{titulo:"Concorrência em Go: goroutines na prática",data:"2025-08-21",instrutor:"Gleyson Sampaio"}] },
+    { id:15, nome:"Formação Engenharia de Dados", tecnologia:["Python","Apache Spark","Airflow","Kafka","Databricks"], nivel:"Avançado", numero_de_modulos:14, xp_total:23000, badges_disponiveis:["Data Engineer","Spark Expert","Airflow Orchestrator","Kafka Streaming Pro","Lakehouse Architect"], promocoes:{desconto_percentual:30,validade:"2025-12-01",cupom:"DATA30"}, vitalicio:true, lives_ao_vivo:[{titulo:"Pipelines de dados com Apache Airflow",data:"2025-07-25",instrutor:"Luciana Pinto"},{titulo:"Streaming em tempo real com Kafka",data:"2025-09-05",instrutor:"Sandeco Macedo"}] },
+    { id:16, nome:"Formação Blockchain e Web3", tecnologia:["Solidity","Ethereum","Web3.js","Hardhat","IPFS"], nivel:"Avançado", numero_de_modulos:10, xp_total:19000, badges_disponiveis:["Solidity Developer","Smart Contract Auditor","Web3 Integrator","DeFi Builder"], promocoes:{desconto_percentual:20,validade:"2025-11-15",cupom:"WEB320"}, vitalicio:false, lives_ao_vivo:[{titulo:"Criando seu primeiro Smart Contract",data:"2025-08-15",instrutor:"Venilton FalvoJr"}] },
+    { id:17, nome:"Formação QA e Automação de Testes", tecnologia:["Selenium","Cypress","Jest","JUnit","Postman"], nivel:"Iniciante", numero_de_modulos:9, xp_total:12000, badges_disponiveis:["QA Engineer","Test Automation Pro","Cypress Expert","API Tester Badge"], promocoes:{desconto_percentual:15,validade:"2025-10-01",cupom:"QA15"}, vitalicio:true, lives_ao_vivo:[{titulo:"Testes E2E com Cypress do zero",data:"2025-07-19",instrutor:"Renan Johannsen"}] },
+    { id:18, nome:"Formação UX/UI Design para Devs", tecnologia:["Figma","Adobe XD","CSS Grid","Flexbox","Design System"], nivel:"Iniciante", numero_de_modulos:7, xp_total:9500, badges_disponiveis:["UX Researcher","UI Designer","Figma Pro","Acessibilidade Badge"], promocoes:{desconto_percentual:10,validade:"2025-08-15",cupom:"UX10"}, vitalicio:true, lives_ao_vivo:[{titulo:"Construindo um Design System do zero",data:"2025-08-08",instrutor:"Michele Ambrosio"}] },
+    { id:19, nome:"Formação Arquitetura de Sistemas e DDD", tecnologia:["DDD","CQRS","Event Sourcing","Clean Architecture","Kafka"], nivel:"Avançado", numero_de_modulos:12, xp_total:20500, badges_disponiveis:["Software Architect","DDD Expert","CQRS Master","Event-Driven Pro","Clean Code Champion"], promocoes:{desconto_percentual:25,validade:"2025-12-20",cupom:"ARCH25"}, vitalicio:true, lives_ao_vivo:[{titulo:"Domain-Driven Design na prática com Java",data:"2025-08-28",instrutor:"Giuliana Bezerra"},{titulo:"Event Sourcing e CQRS: teoria e prática",data:"2025-09-18",instrutor:"Gleyson Sampaio"}] },
+    { id:20, nome:"Formação Flutter: Apps Multiplataforma", tecnologia:["Flutter","Dart","Firebase","BLoC","GetX"], nivel:"Intermediário", numero_de_modulos:10, xp_total:14800, badges_disponiveis:["Flutter Developer","Dart Pro","BLoC Architect","Cross-Platform Badge","Firebase Mobile Expert"], promocoes:{desconto_percentual:20,validade:"2025-10-20",cupom:"FLUTTER20"}, vitalicio:true, lives_ao_vivo:[{titulo:"Construindo apps Flutter com BLoC",data:"2025-07-27",instrutor:"André Oporto"},{titulo:"Integração Firebase no Flutter",data:"2025-08-24",instrutor:"Natalia Natalia"}] }
+  ];
+
+  function nivelClass(nivel) {
+    if (nivel === "Iniciante") return "nivel-iniciante";
+    if (nivel === "Avançado") return "nivel-avancado";
+    return "nivel-intermediario";
+  }
+
+  function renderTrilhas(list) {
+    const grid = document.getElementById("trilhasGrid");
+    const noRes = document.getElementById("no-results");
+    grid.innerHTML = "";
+    if (list.length === 0) { noRes.style.display = "block"; return; }
+    noRes.style.display = "none";
+    list.forEach(t => {
+      const promo = t.promocoes.desconto_percentual > 0
+        ? `<div class="promo-strip">🎉 ${t.promocoes.desconto_percentual}% off · Cupom: <strong>${t.promocoes.cupom}</strong> · até ${t.promocoes.validade}</div>`
+        : "";
+      const card = document.createElement("div");
+      card.className = "card trilha-card";
+      card.innerHTML = `
+        <div class="card-top">
+          <h3>${t.nome}</h3>
+          <span class="badge-nivel ${nivelClass(t.nivel)}">${t.nivel}</span>
+        </div>
+        <div class="trilha-meta">
+          <span class="meta-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.5A1.5 1.5 0 012.5 1h3A1.5 1.5 0 017 2.5v3A1.5 1.5 0 015.5 7h-3A1.5 1.5 0 011 5.5v-3zm8 0A1.5 1.5 0 0110.5 1h3A1.5 1.5 0 0115 2.5v3A1.5 1.5 0 0113.5 7h-3A1.5 1.5 0 019 5.5v-3zm-8 8A1.5 1.5 0 012.5 9h3A1.5 1.5 0 017 10.5v3A1.5 1.5 0 015.5 15h-3A1.5 1.5 0 011 13.5v-3zm8 0A1.5 1.5 0 0110.5 9h3A1.5 1.5 0 0115 10.5v3A1.5 1.5 0 0113.5 15h-3A1.5 1.5 0 019 13.5v-3z"/></svg>${t.numero_de_modulos} módulos</span>
+          <span class="meta-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8z"/><path d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H5a.5.5 0 010-1h2.5V4a.5.5 0 01.5-.5z"/></svg>${t.xp_total.toLocaleString("pt-BR")} XP</span>
+          <span class="meta-item">${t.vitalicio ? "♾️ Vitalício" : "⏳ Temporário"}</span>
+        </div>
+        <div class="tech-tags">${t.tecnologia.slice(0,5).map(tech => `<span class="tech-tag">${tech}</span>`).join("")}</div>
+        ${promo}
+      `;
+      card.addEventListener("click", () => openModal(t));
+      grid.appendChild(card);
+    });
+  }
+
+  function filterTrilhas() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const nivel = document.getElementById("nivelFilter").value;
+    const filtered = TRILHAS.filter(t => {
+      const matchText = !query || t.nome.toLowerCase().includes(query) || t.tecnologia.some(tech => tech.toLowerCase().includes(query));
+      const matchNivel = !nivel || t.nivel === nivel;
+      return matchText && matchNivel;
+    });
+    renderTrilhas(filtered);
+  }
+
+  function openModal(t) {
+    document.getElementById("modalTitle").textContent = t.nome;
+    const badges = t.badges_disponiveis.map(b => `<span class="badge-item">⭐ ${b}</span>`).join("");
+    const lives = t.lives_ao_vivo.map(l => `<div class="live-item"><strong>${l.titulo}</strong><span>${l.data} · ${l.instrutor}</span></div>`).join("");
+    const promo = t.promocoes.desconto_percentual > 0
+      ? `<div class="promo-strip" style="margin-bottom:0">🎉 ${t.promocoes.desconto_percentual}% de desconto · Cupom: <strong>${t.promocoes.cupom}</strong> · Válido até ${t.promocoes.validade}</div>`
+      : `<span style="color:var(--muted);font-size:13px;">Sem promoção ativa no momento.</span>`;
+    document.getElementById("modalBody").innerHTML = `
+      <div class="modal-section">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+          <span class="badge-nivel ${nivelClass(t.nivel)}">${t.nivel}</span>
+          <span style="font-size:12px;color:var(--muted);align-self:center;">${t.numero_de_modulos} módulos · ${t.xp_total.toLocaleString("pt-BR")} XP · ${t.vitalicio ? "♾️ Vitalício" : "⏳ Temporário"}</span>
+        </div>
+        <div class="tech-tags">${t.tecnologia.map(tech => `<span class="tech-tag">${tech}</span>`).join("")}</div>
+      </div>
+      <div class="modal-section"><h4>Badges Disponíveis</h4><div class="badges-list">${badges}</div></div>
+      <div class="modal-section"><h4>Lives ao Vivo</h4><div class="lives-list">${lives}</div></div>
+      <div class="modal-section"><h4>Promoção</h4>${promo}</div>
+    `;
+    document.getElementById("modalOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById("modalOverlay")) closeModalDirect();
+  }
+
+  function closeModalDirect() {
+    document.getElementById("modalOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalDirect(); });
+
+  function showTab(name) {
+    document.querySelectorAll(".demo-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".demo-panel").forEach(p => p.classList.remove("active"));
+    document.getElementById("tab-" + name).classList.add("active");
+    event.target.classList.add("active");
+  }
+
+  // Nav active link on scroll
+  const sections = ["features","demo","trilhas","arquitetura","testes"];
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 100) current = id;
+    });
+    document.querySelectorAll(".nav-links a").forEach(a => {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  });
+
+  // Init
+  renderTrilhas(TRILHAS);
+</script>
+</body>
+</html>

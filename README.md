@@ -1,9 +1,27 @@
 # DIO Explorer — Projeto Final IBM Bob × DIO
 
-> Projeto final do curso **IBM Bob** promovido pela [Digital Innovation One (DIO)](https://dio.me).  
+> Projeto final do curso **IBM Bob** promovido pela [Digital Innovation One (DIO)](https://dio.me).
 > Integração completa entre IBM Bob, comandos personalizados, skills e um servidor MCP em TypeScript.
 
+## 🌐 Interface Web (Live Demo)
+
+**Acesse a interface pública do projeto:**
+
+> **[https://davirios.github.io/Projeto-final-IBM_bob-curso-DIO/](https://davirios.github.io/Projeto-final-IBM_bob-curso-DIO/)**
+
+A interface demonstra ao vivo:
+- 🔍 **Explorador de Trilhas** — busca e filtragem das 20+ trilhas DIO com modal de detalhes
+- ⚡ **Demo dos Comandos** — saída real dos comandos `/trilha`, `/desafio`, `/certificado`
+- 🔌 **Demo MCP HTTP** — exemplo de chamada curl ao servidor
+- 🧪 **Relatório de Testes** — cobertura visual das 10 suites e 53 testes
+- 🏗️ **Arquitetura** — visão geral das camadas do projeto
+
+> **Como habilitar o GitHub Pages:**
+> Acesse **Settings → Pages → Source: Deploy from branch → Branch: `main` → Folder: `/ (root)`** e salve.
+> A URL pública estará disponível em `https://<seu-usuario>.github.io/Projeto-final-IBM_bob-curso-DIO/`.
+
 ---
+
 
 ## 📋 Índice
 
