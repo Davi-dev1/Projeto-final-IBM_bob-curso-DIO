@@ -3,22 +3,44 @@
 > Projeto final do curso **IBM Bob** promovido pela [Digital Innovation One (DIO)](https://dio.me).
 > Integração completa entre IBM Bob, comandos personalizados, skills e um servidor MCP em TypeScript.
 
-## 🌐 Interface Web (Live Demo)
+## 🆕 Novidade — Interface Visual (Front-End de Amostra)
 
-**Acesse a interface pública do projeto:**
+> **✨ Melhoria adicionada:** Este projeto ganhou uma interface web moderna e responsiva, desenvolvida como **demonstração visual** do funcionamento do software. O front-end é uma **página estática de amostra** — ele não se conecta ao servidor MCP real nem executa os comandos de verdade. Seu objetivo é ilustrar de forma clara e acessível o que o projeto faz, permitindo que qualquer pessoa explore o catálogo de trilhas e entenda a proposta sem precisar instalar nada.
 
-> **[https://davirios.github.io/Projeto-final-IBM_bob-curso-DIO/](https://davirios.github.io/Projeto-final-IBM_bob-curso-DIO/)**
+---
 
-A interface demonstra ao vivo:
-- 🔍 **Explorador de Trilhas** — busca e filtragem das 20+ trilhas DIO com modal de detalhes
-- ⚡ **Demo dos Comandos** — saída real dos comandos `/trilha`, `/desafio`, `/certificado`
-- 🔌 **Demo MCP HTTP** — exemplo de chamada curl ao servidor
-- 🧪 **Relatório de Testes** — cobertura visual das 10 suites e 53 testes
-- 🏗️ **Arquitetura** — visão geral das camadas do projeto
+## 🌐 Acesse a Interface Web
 
-> **Como habilitar o GitHub Pages:**
-> Acesse **Settings → Pages → Source: Deploy from branch → Branch: `main` → Folder: `/ (root)`** e salve.
-> A URL pública estará disponível em `https://<seu-usuario>.github.io/Projeto-final-IBM_bob-curso-DIO/`.
+<div align="center">
+
+### 🔗 [https://davi-dev1.github.io/Projeto-final-IBM_bob-curso-DIO/](https://davi-dev1.github.io/Projeto-final-IBM_bob-curso-DIO/)
+
+**Clique no link acima para abrir a interface diretamente no navegador — sem instalação.**
+
+</div>
+
+---
+
+### 📌 O que é e o que NÃO é este front-end
+
+| ✅ O que ele É | ❌ O que ele NÃO é |
+|---|---|
+| Uma vitrine visual do projeto | Um cliente real do servidor MCP |
+| Demonstração dos comandos com saídas reais simuladas | Uma interface que executa `/trilha`, `/desafio` ou `/certificado` de verdade |
+| Explorador interativo das 20+ trilhas do catálogo JSON | Um painel conectado a um back-end ao vivo |
+| Página estática hospedada via GitHub Pages | Um sistema que requer servidor rodando |
+
+> 💡 Para usar as funcionalidades reais, consulte a seção [Modos de Uso](#7-modos-de-uso) abaixo.
+
+---
+
+### 🖥️ O que você encontra na interface
+
+- 🔍 **Explorador de Trilhas** — busca e filtragem das 20+ trilhas DIO com modal de detalhes completos
+- ⚡ **Demo dos Comandos** — saída simulada dos comandos `/trilha`, `/desafio`, `/certificado`
+- 🔌 **Demo MCP HTTP** — exemplo visual de chamada `curl` ao servidor
+- 🧪 **Relatório de Testes** — cobertura visual das 10 suites e 53 testes unitários
+- 🏗️ **Arquitetura** — visão geral das camadas e stack tecnológica do projeto
 
 ---
 
