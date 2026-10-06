@@ -1,6 +1,6 @@
-# DIO Explorer — MCP Server
+# Geo-Explorer — MCP Server
 
-Servidor MCP do projeto **DIO Explorer**, expondo as ferramentas `/trilha`, `/desafio` e `/certificado` via protocolo MCP (Model Context Protocol).
+Servidor MCP do projeto **Geo-Explorer**, expondo as ferramentas `/trilha`, `/desafio` e `/certificado` via protocolo MCP (Model Context Protocol).
 
 Suporta três modos de acesso:
 - **stdio** — integração direta com o Bob (IBM Bob / Claude Desktop)
@@ -53,7 +53,7 @@ node build/index.js
 ```json
 {
   "mcpServers": {
-    "dio-explorer": {
+    "geo-explorer": {
       "command": "node",
       "args": ["<caminho-absoluto>/MCP/build/index.js"]
     }
@@ -126,7 +126,7 @@ DIO_API_KEY=<chave> node build/index.js --transport http
 ```json
 {
   "mcpServers": {
-    "dio-explorer-remote": {
+    "geo-explorer-remote": {
       "url": "https://seu-servidor.com:3443/mcp",
       "headers": {
         "Authorization": "Bearer ${env:DIO_API_KEY}"

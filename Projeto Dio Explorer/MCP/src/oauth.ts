@@ -1,6 +1,6 @@
 /**
  * oauth.ts
- * Implementação de SSO via OAuth 2.0 Authorization Code Flow para o DIO Explorer MCP.
+ * Implementação de SSO via OAuth 2.0 Authorization Code Flow para o Geo-Explorer MCP.
  *
  * Fluxo suportado:
  *   1. GET  /oauth/authorize  → redireciona o usuário para o provider OAuth externo

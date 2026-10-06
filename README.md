@@ -1,4 +1,4 @@
-# DIO Explorer — Projeto Final IBM Bob × DIO
+# Geo-Explorer — Projeto Final IBM Bob × DIO
 
 > Projeto final do curso **IBM Bob** promovido pela [Digital Innovation One (DIO)](https://dio.me).
 > Integração completa entre IBM Bob, comandos personalizados, skills e um servidor MCP em TypeScript.
@@ -40,7 +40,7 @@ A interface demonstra ao vivo:
 
 ## 1. Visão Geral
 
-O **DIO Explorer** expõe três funcionalidades principais — busca de trilhas, geração de desafios de código e emissão de certificados — acessíveis de múltiplas formas:
+O **Geo-Explorer** expõe três funcionalidades principais — busca de trilhas, geração de desafios de código e emissão de certificados — acessíveis de múltiplas formas:
 
 | Camada | Tecnologia | Descrição |
 |---|---|---|
@@ -354,7 +354,7 @@ Registre o servidor no `mcp.json` do Bob:
 ```json
 {
   "mcpServers": {
-    "dio-explorer": {
+    "geo-explorer": {
       "command": "node",
       "args": ["C:/caminho/absoluto/MCP/build/index.js"]
     }
@@ -405,7 +405,7 @@ Com o servidor registrado no Bob, as tools são chamadas automaticamente por lin
 
 ```
 Você: "Busca a trilha de AWS pra mim"
-Bob:  → chama mcp__dio-explorer__trilha_buscar(tecnologia="AWS")
+Bob:  → chama mcp__geo-explorer__trilha_buscar(tecnologia="AWS")
 ```
 
 ---
@@ -493,7 +493,7 @@ Variáveis de ambiente e flags de argumento permitem rodar em laptop (stdio), st
 - [ ] Adicionar persistência ao catálogo (PostgreSQL ou SQLite)
 - [ ] Implementar PKCE no Authorization Code Flow
 - [ ] Criar dashboard web em React consumindo `GET /api/trilhas`
-- [ ] Publicar o MCP Server no npm (`npx dio-explorer-mcp`)
+- [ ] Publicar o MCP Server no npm (`npx geo-explorer-mcp`)
 - [ ] Adicionar testes de integração TypeScript com vitest
 - [ ] Configurar CI/CD com GitHub Actions: lint → testes → build → deploy
 

@@ -1,6 +1,6 @@
 /**
  * https-server.ts
- * Wrapper HTTPS (TLS) para o servidor Express do DIO Explorer MCP.
+ * Wrapper HTTPS (TLS) para o servidor Express do Geo-Explorer MCP.
  *
  * Variáveis de ambiente:
  *   DIO_TLS_CERT   Caminho para o certificado PEM (ex: /certs/server.crt)
@@ -69,10 +69,10 @@ export function startServer(app: Express): void {
     );
     httpsServer.listen(httpsPort, "0.0.0.0", () => {
       console.error(
-        `[dio-explorer-mcp] HTTPS server listening on https://0.0.0.0:${httpsPort}`
+        `[geo-explorer-mcp] HTTPS server listening on https://0.0.0.0:${httpsPort}`
       );
       console.error(
-        `[dio-explorer-mcp] MCP endpoint: POST https://0.0.0.0:${httpsPort}/mcp`
+        `[geo-explorer-mcp] MCP endpoint: POST https://0.0.0.0:${httpsPort}/mcp`
       );
     });
 
@@ -88,7 +88,7 @@ export function startServer(app: Express): void {
         })
         .listen(httpPort, "0.0.0.0", () => {
           console.error(
-            `[dio-explorer-mcp] HTTP→HTTPS redirect on http://0.0.0.0:${httpPort}`
+            `[geo-explorer-mcp] HTTP→HTTPS redirect on http://0.0.0.0:${httpPort}`
           );
         });
     }
@@ -96,13 +96,13 @@ export function startServer(app: Express): void {
     // ── Fallback HTTP (sem TLS) ───────────────────────────────────────────────
     app.listen(httpPort, "0.0.0.0", () => {
       console.error(
-        `[dio-explorer-mcp] HTTP server listening on http://0.0.0.0:${httpPort}`
+        `[geo-explorer-mcp] HTTP server listening on http://0.0.0.0:${httpPort}`
       );
       console.error(
-        `[dio-explorer-mcp] MCP endpoint: POST http://0.0.0.0:${httpPort}/mcp`
+        `[geo-explorer-mcp] MCP endpoint: POST http://0.0.0.0:${httpPort}/mcp`
       );
       console.error(
-        "[dio-explorer-mcp] TLS not configured — running in plain HTTP mode"
+        "[geo-explorer-mcp] TLS not configured — running in plain HTTP mode"
       );
     });
   }

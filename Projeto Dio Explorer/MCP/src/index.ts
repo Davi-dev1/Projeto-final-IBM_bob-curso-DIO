@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * index.ts — DIO Explorer MCP Server
+ * index.ts — Geo-Explorer MCP Server
  *
  * Modos de transporte:
  *   stdio (padrão) : node build/index.js
@@ -66,7 +66,7 @@ import { startServer } from "./https-server.js";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const server = new McpServer({
-  name: "dio-explorer-mcp",
+  name: "geo-explorer-mcp",
   version: "1.0.0",
 });
 
@@ -321,7 +321,7 @@ const useHttp =
 async function startStdio(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("[dio-explorer-mcp] Server running on stdio");
+  console.error("[geo-explorer-mcp] Server running on stdio");
 }
 
 async function startHttp(): Promise<void> {
@@ -339,7 +339,7 @@ async function startHttp(): Promise<void> {
   app.get("/health", (_req, res) => {
     res.json({
       status: "ok",
-      server: "dio-explorer-mcp",
+      server: "geo-explorer-mcp",
       version: "1.0.0",
       transport: "http",
       tls: !!(process.env.DIO_TLS_CERT && process.env.DIO_TLS_KEY),
@@ -383,6 +383,6 @@ async function startHttp(): Promise<void> {
 // ─────────────────────────────────────────────────────────────────────────────
 
 (useHttp ? startHttp() : startStdio()).catch((err) => {
-  console.error("[dio-explorer-mcp] Fatal error:", err);
+  console.error("[geo-explorer-mcp] Fatal error:", err);
   process.exit(1);
 });

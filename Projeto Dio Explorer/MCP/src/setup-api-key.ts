@@ -26,7 +26,7 @@ if (existsSync(ENV_PATH)) {
 
 const key = generate();
 const envContent = [
-  `# DIO Explorer MCP Server — Environment`,
+  `# Geo-Explorer MCP Server — Environment`,
   `# Gerado automaticamente em ${new Date().toISOString()}`,
   ``,
   `# Chave de acesso ao servidor MCP HTTP`,

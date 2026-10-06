@@ -1,7 +1,7 @@
 {
-  "name": "dio-explorer-mcp",
+  "name": "geo-explorer-mcp",
   "version": "1.0.0",
-  "description": "MCP Server for DIO Explorer — exposes /trilha, /desafio and /certificado commands via MCP protocol (stdio + HTTP)",
+  "description": "MCP Server for Geo-Explorer — exposes /trilha, /desafio and /certificado commands via MCP protocol (stdio + HTTP)",
   "type": "module",
   "scripts": {
     "build": "tsc",
@@ -11,7 +11,7 @@
     "setup-key": "node build/setup-api-key.js"
   },
   "bin": {
-    "dio-explorer-mcp": "./build/index.js"
+    "geo-explorer-mcp": "./build/index.js"
   },
   "files": [
     "build"
