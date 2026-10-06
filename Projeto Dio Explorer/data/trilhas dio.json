@@ -1,0 +1,1012 @@
+{
+  "trilhas": [
+    {
+      "id": 1,
+      "nome": "Formação Full Stack Java + Angular",
+      "tecnologia": ["Java", "Spring Boot", "Angular", "TypeScript", "PostgreSQL"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 12,
+      "xp_total": 18500,
+      "badges_disponiveis": [
+        "Java Developer",
+        "Spring Boot Expert",
+        "Angular Professional",
+        "Full Stack Badge",
+        "API REST Master"
+      ],
+      "promocoes": {
+        "desconto_percentual": 30,
+        "validade": "2025-12-31",
+        "cupom": "FULLSTACK30"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Construindo uma API REST com Spring Boot",
+          "data": "2025-07-10",
+          "instrutor": "Gleyson Sampaio"
+        },
+        {
+          "titulo": "Deploy de aplicações Angular na Vercel",
+          "data": "2025-07-24",
+          "instrutor": "Renan Johannsen"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Formação Python para Data Science",
+      "tecnologia": ["Python", "Pandas", "NumPy", "Scikit-learn", "Jupyter Notebook"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 10,
+      "xp_total": 14200,
+      "badges_disponiveis": [
+        "Python Starter",
+        "Data Analyst",
+        "Machine Learning Practitioner",
+        "Pandas Expert",
+        "Jupyter Pro"
+      ],
+      "promocoes": {
+        "desconto_percentual": 25,
+        "validade": "2025-09-30",
+        "cupom": "DATASCIENCE25"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Análise Exploratória de Dados com Pandas",
+          "data": "2025-07-15",
+          "instrutor": "Luciana Pinto"
+        },
+        {
+          "titulo": "Machine Learning do Zero com Scikit-learn",
+          "data": "2025-08-05",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Formação Front-End com React",
+      "tecnologia": ["React", "JavaScript", "CSS3", "HTML5", "Redux", "Next.js"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 9,
+      "xp_total": 13800,
+      "badges_disponiveis": [
+        "React Developer",
+        "JavaScript Pro",
+        "Next.js Expert",
+        "Redux Master",
+        "UI/UX Frontend Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-10-15",
+        "cupom": "REACT20"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando componentes reutilizáveis com React",
+          "data": "2025-07-18",
+          "instrutor": "Michele Ambrosio"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Formação DevOps & Cloud AWS",
+      "tecnologia": ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD", "Linux"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 14,
+      "xp_total": 22000,
+      "badges_disponiveis": [
+        "AWS Cloud Practitioner",
+        "Docker Captain",
+        "Kubernetes Operator",
+        "Terraform Builder",
+        "DevOps Champion",
+        "Pipeline Engineer"
+      ],
+      "promocoes": {
+        "desconto_percentual": 35,
+        "validade": "2025-11-30",
+        "cupom": "DEVOPS35"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando clusters Kubernetes na AWS",
+          "data": "2025-07-22",
+          "instrutor": "Sandeco Macedo"
+        },
+        {
+          "titulo": "Infraestrutura como Código com Terraform",
+          "data": "2025-08-12",
+          "instrutor": "Elidiana Andrade"
+        },
+        {
+          "titulo": "Pipeline CI/CD com GitHub Actions",
+          "data": "2025-09-03",
+          "instrutor": "Venilton FalvoJr"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Formação .NET C# Developer",
+      "tecnologia": ["C#", ".NET 8", "ASP.NET Core", "Entity Framework", "SQL Server"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 11,
+      "xp_total": 16300,
+      "badges_disponiveis": [
+        "C# Developer",
+        ".NET Expert",
+        "ASP.NET Core Pro",
+        "Entity Framework Master",
+        "Backend .NET Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 0,
+        "validade": null,
+        "cupom": null
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando APIs modernas com ASP.NET Core 8",
+          "data": "2025-07-29",
+          "instrutor": "Giuliana Bezerra"
+        },
+        {
+          "titulo": "ORM com Entity Framework Core na prática",
+          "data": "2025-08-19",
+          "instrutor": "Renan Johannsen"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "Formação Mobile Android com Kotlin",
+      "tecnologia": ["Kotlin", "Android SDK", "Jetpack Compose", "Firebase", "Room DB"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 10,
+      "xp_total": 15600,
+      "badges_disponiveis": [
+        "Kotlin Developer",
+        "Android Professional",
+        "Jetpack Compose Expert",
+        "Firebase Integrator",
+        "Mobile Dev Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 15,
+        "validade": "2025-08-31",
+        "cupom": "KOTLIN15"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Primeiro app completo com Jetpack Compose",
+          "data": "2025-07-31",
+          "instrutor": "Natalia Natalia"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "Formação iOS com Swift e SwiftUI",
+      "tecnologia": ["Swift", "SwiftUI", "Xcode", "Core Data", "CloudKit"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 11,
+      "xp_total": 17900,
+      "badges_disponiveis": [
+        "Swift Developer",
+        "SwiftUI Expert",
+        "iOS Professional",
+        "Apple Ecosystem Badge",
+        "Core Data Master"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-10-01",
+        "cupom": "IOS20"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Construindo apps iOS modernos com SwiftUI",
+          "data": "2025-08-07",
+          "instrutor": "André Oporto"
+        },
+        {
+          "titulo": "Persistência de dados com Core Data",
+          "data": "2025-09-10",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Formação Inteligência Artificial com Python",
+      "tecnologia": ["Python", "TensorFlow", "Keras", "PyTorch", "OpenCV"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 13,
+      "xp_total": 21500,
+      "badges_disponiveis": [
+        "AI Practitioner",
+        "Deep Learning Expert",
+        "TensorFlow Pro",
+        "PyTorch Master",
+        "Computer Vision Badge",
+        "Neural Network Architect"
+      ],
+      "promocoes": {
+        "desconto_percentual": 40,
+        "validade": "2025-07-31",
+        "cupom": "AI40"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Redes Neurais com TensorFlow do zero",
+          "data": "2025-07-14",
+          "instrutor": "Luciana Pinto"
+        },
+        {
+          "titulo": "Visão Computacional com OpenCV",
+          "data": "2025-08-25",
+          "instrutor": "Sandeco Macedo"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nome": "Formação SQL e Banco de Dados Relacional",
+      "tecnologia": ["SQL", "MySQL", "PostgreSQL", "Oracle DB", "SQL Server"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 8,
+      "xp_total": 11000,
+      "badges_disponiveis": [
+        "SQL Beginner",
+        "Database Designer",
+        "Query Optimizer",
+        "DBA Junior Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 10,
+        "validade": "2025-09-15",
+        "cupom": "SQL10"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "SQL para iniciantes: consultas essenciais",
+          "data": "2025-07-17",
+          "instrutor": "Elidiana Andrade"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nome": "Formação NoSQL com MongoDB e Redis",
+      "tecnologia": ["MongoDB", "Redis", "Cassandra", "DynamoDB", "Node.js"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 9,
+      "xp_total": 13200,
+      "badges_disponiveis": [
+        "NoSQL Developer",
+        "MongoDB Expert",
+        "Redis Caching Pro",
+        "Distributed DB Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 25,
+        "validade": "2025-11-01",
+        "cupom": "NOSQL25"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Modelagem de dados no MongoDB Atlas",
+          "data": "2025-08-02",
+          "instrutor": "Giuliana Bezerra"
+        },
+        {
+          "titulo": "Cache de alta performance com Redis",
+          "data": "2025-09-16",
+          "instrutor": "Gleyson Sampaio"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nome": "Formação Segurança da Informação",
+      "tecnologia": ["Kali Linux", "Metasploit", "Wireshark", "OWASP", "Nmap"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 12,
+      "xp_total": 20000,
+      "badges_disponiveis": [
+        "Ethical Hacker",
+        "Pentester Pro",
+        "OWASP Defender",
+        "Network Security Badge",
+        "Cybersecurity Expert"
+      ],
+      "promocoes": {
+        "desconto_percentual": 30,
+        "validade": "2025-10-31",
+        "cupom": "SEC30"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Pentest Web com OWASP Top 10",
+          "data": "2025-07-26",
+          "instrutor": "Venilton FalvoJr"
+        },
+        {
+          "titulo": "Análise de tráfego com Wireshark",
+          "data": "2025-08-30",
+          "instrutor": "Sandeco Macedo"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nome": "Formação Node.js e Microsserviços",
+      "tecnologia": ["Node.js", "Express", "NestJS", "RabbitMQ", "Docker", "gRPC"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 11,
+      "xp_total": 16800,
+      "badges_disponiveis": [
+        "Node.js Developer",
+        "NestJS Expert",
+        "Microservices Architect",
+        "RabbitMQ Integrator",
+        "gRPC Pro"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-12-15",
+        "cupom": "NODE20"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Arquitetura de microsserviços com NestJS",
+          "data": "2025-07-20",
+          "instrutor": "Michele Ambrosio"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "nome": "Formação Vue.js do Básico ao Avançado",
+      "tecnologia": ["Vue.js", "Vuex", "Pinia", "Nuxt.js", "TypeScript"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 8,
+      "xp_total": 12500,
+      "badges_disponiveis": [
+        "Vue.js Developer",
+        "Pinia State Manager",
+        "Nuxt.js SSR Expert",
+        "Frontend Vue Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 15,
+        "validade": "2025-09-01",
+        "cupom": "VUE15"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Gerenciamento de estado com Pinia no Vue 3",
+          "data": "2025-08-14",
+          "instrutor": "Michele Ambrosio"
+        },
+        {
+          "titulo": "SSR com Nuxt.js na prática",
+          "data": "2025-09-20",
+          "instrutor": "Renan Johannsen"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "nome": "Formação Cloud Azure Developer",
+      "tecnologia": ["Microsoft Azure", "Azure Functions", "Azure DevOps", "Bicep", "AKS"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 13,
+      "xp_total": 21000,
+      "badges_disponiveis": [
+        "Azure Developer",
+        "Azure Functions Expert",
+        "AKS Operator",
+        "Azure DevOps Pro",
+        "Cloud Azure Badge",
+        "Bicep IaC Master"
+      ],
+      "promocoes": {
+        "desconto_percentual": 35,
+        "validade": "2025-11-15",
+        "cupom": "AZURE35"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Serverless com Azure Functions",
+          "data": "2025-07-23",
+          "instrutor": "Elidiana Andrade"
+        },
+        {
+          "titulo": "Kubernetes no Azure (AKS) passo a passo",
+          "data": "2025-09-04",
+          "instrutor": "Venilton FalvoJr"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "nome": "Formação Google Cloud Platform",
+      "tecnologia": ["GCP", "BigQuery", "Cloud Run", "Pub/Sub", "Firebase"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 12,
+      "xp_total": 19800,
+      "badges_disponiveis": [
+        "GCP Associate",
+        "BigQuery Analyst",
+        "Cloud Run Developer",
+        "Pub/Sub Integrator",
+        "Google Cloud Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 25,
+        "validade": "2025-12-01",
+        "cupom": "GCP25"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Análise de Big Data com BigQuery",
+          "data": "2025-08-08",
+          "instrutor": "Luciana Pinto"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "nome": "Formação Desenvolvedor Go (Golang)",
+      "tecnologia": ["Go", "Gin", "GORM", "gRPC", "Docker"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 9,
+      "xp_total": 14700,
+      "badges_disponiveis": [
+        "Go Developer",
+        "Gin API Expert",
+        "GORM ORM Pro",
+        "Golang Backend Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-10-20",
+        "cupom": "GO20"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "APIs de alta performance com Gin e Go",
+          "data": "2025-07-27",
+          "instrutor": "Gleyson Sampaio"
+        },
+        {
+          "titulo": "Concorrência e goroutines em Go",
+          "data": "2025-09-12",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "nome": "Formação Engenharia de Dados",
+      "tecnologia": ["Apache Spark", "Kafka", "Airflow", "Databricks", "Python", "Delta Lake"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 14,
+      "xp_total": 23000,
+      "badges_disponiveis": [
+        "Data Engineer",
+        "Spark Expert",
+        "Kafka Streaming Pro",
+        "Airflow Orchestrator",
+        "Databricks Certified",
+        "Big Data Architect"
+      ],
+      "promocoes": {
+        "desconto_percentual": 40,
+        "validade": "2025-08-01",
+        "cupom": "DADOS40"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Pipelines de dados com Apache Airflow",
+          "data": "2025-07-11",
+          "instrutor": "Sandeco Macedo"
+        },
+        {
+          "titulo": "Streaming em tempo real com Kafka",
+          "data": "2025-08-22",
+          "instrutor": "Luciana Pinto"
+        },
+        {
+          "titulo": "Lakehouse com Databricks e Delta Lake",
+          "data": "2025-09-18",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "nome": "Formação UI/UX Design Profissional",
+      "tecnologia": ["Figma", "Adobe XD", "Protopie", "Design Thinking", "Storybook"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 7,
+      "xp_total": 10500,
+      "badges_disponiveis": [
+        "UX Researcher",
+        "UI Designer Pro",
+        "Figma Expert",
+        "Design System Builder",
+        "Prototype Master"
+      ],
+      "promocoes": {
+        "desconto_percentual": 10,
+        "validade": "2025-09-30",
+        "cupom": "UXUI10"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando Design Systems profissionais no Figma",
+          "data": "2025-07-25",
+          "instrutor": "Michele Ambrosio"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "nome": "Formação WordPress e PHP para Web",
+      "tecnologia": ["PHP", "WordPress", "MySQL", "WooCommerce", "Elementor"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 7,
+      "xp_total": 9800,
+      "badges_disponiveis": [
+        "PHP Developer",
+        "WordPress Expert",
+        "WooCommerce Pro",
+        "Web Freelancer Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 10,
+        "validade": "2025-08-15",
+        "cupom": "WP10"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando lojas virtuais com WooCommerce",
+          "data": "2025-08-01",
+          "instrutor": "Renan Johannsen"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "nome": "Formação Engenharia de Software na Prática",
+      "tecnologia": ["Arquitetura de Software", "Design Patterns", "Clean Code", "SOLID", "DDD", "TDD"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 12,
+      "xp_total": 19200,
+      "badges_disponiveis": [
+        "Software Engineer",
+        "Clean Code Practitioner",
+        "SOLID Principles Expert",
+        "DDD Architect",
+        "TDD Champion",
+        "Design Patterns Master"
+      ],
+      "promocoes": {
+        "desconto_percentual": 30,
+        "validade": "2025-11-20",
+        "cupom": "ENGSOFT30"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Domain-Driven Design na prática",
+          "data": "2025-07-30",
+          "instrutor": "Gleyson Sampaio"
+        },
+        {
+          "titulo": "TDD com Java: escrevendo testes antes do código",
+          "data": "2025-08-27",
+          "instrutor": "Giuliana Bezerra"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "nome": "Formação Flutter Cross-Platform",
+      "tecnologia": ["Flutter", "Dart", "Firebase", "Bloc", "GetX"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 10,
+      "xp_total": 15000,
+      "badges_disponiveis": [
+        "Flutter Developer",
+        "Dart Expert",
+        "Cross-Platform Pro",
+        "Firebase Mobile Badge",
+        "Bloc State Manager"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-10-10",
+        "cupom": "FLUTTER20"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Apps multiplataforma com Flutter e Firebase",
+          "data": "2025-08-09",
+          "instrutor": "André Oporto"
+        },
+        {
+          "titulo": "Gerenciamento de estado com Bloc no Flutter",
+          "data": "2025-09-25",
+          "instrutor": "Natalia Natalia"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "nome": "Formação Blockchain e Web3",
+      "tecnologia": ["Solidity", "Ethereum", "Hardhat", "Web3.js", "Metamask", "IPFS"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 11,
+      "xp_total": 20500,
+      "badges_disponiveis": [
+        "Blockchain Developer",
+        "Solidity Smart Contract Expert",
+        "Web3 Pioneer",
+        "Ethereum Badge",
+        "DeFi Builder",
+        "NFT Developer"
+      ],
+      "promocoes": {
+        "desconto_percentual": 35,
+        "validade": "2025-12-20",
+        "cupom": "WEB350"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Smart Contracts com Solidity do zero",
+          "data": "2025-07-16",
+          "instrutor": "Venilton FalvoJr"
+        },
+        {
+          "titulo": "Criando NFTs na prática com Hardhat",
+          "data": "2025-09-02",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "nome": "Formação Quality Assurance e Testes de Software",
+      "tecnologia": ["Selenium", "Cypress", "Jest", "JUnit", "Postman", "K6"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 9,
+      "xp_total": 13500,
+      "badges_disponiveis": [
+        "QA Engineer",
+        "Selenium Tester",
+        "Cypress Automation Expert",
+        "API Testing Pro",
+        "Performance Tester Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 15,
+        "validade": "2025-10-05",
+        "cupom": "QA15"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Testes E2E com Cypress na prática",
+          "data": "2025-08-21",
+          "instrutor": "Giuliana Bezerra"
+        },
+        {
+          "titulo": "Testes de carga e performance com K6",
+          "data": "2025-09-30",
+          "instrutor": "Sandeco Macedo"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "nome": "Formação Power BI e Visualização de Dados",
+      "tecnologia": ["Power BI", "DAX", "Power Query", "Excel", "Tableau"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 7,
+      "xp_total": 10200,
+      "badges_disponiveis": [
+        "Power BI Analyst",
+        "DAX Expert",
+        "Data Visualization Pro",
+        "Business Intelligence Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 15,
+        "validade": "2025-09-01",
+        "cupom": "BI15"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Dashboards executivos com Power BI",
+          "data": "2025-07-19",
+          "instrutor": "Luciana Pinto"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "nome": "Formação Desenvolvimento de Games com Unity",
+      "tecnologia": ["Unity", "C#", "Blender", "Physics Engine", "Cinemachine"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 11,
+      "xp_total": 17000,
+      "badges_disponiveis": [
+        "Unity Game Developer",
+        "C# Gameplay Scripter",
+        "3D Artist Basics",
+        "Indie Game Creator",
+        "Physics Pro Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 20,
+        "validade": "2025-11-05",
+        "cupom": "UNITY20"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Criando seu primeiro jogo 3D com Unity",
+          "data": "2025-08-06",
+          "instrutor": "André Oporto"
+        },
+        {
+          "titulo": "Sistema de física e animações no Unity",
+          "data": "2025-09-17",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "nome": "Formação Linux Avançado para Servidores",
+      "tecnologia": ["Linux", "Bash", "Nginx", "Apache", "Shell Script", "Cron"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 8,
+      "xp_total": 12000,
+      "badges_disponiveis": [
+        "Linux Admin",
+        "Bash Scripting Pro",
+        "Nginx Expert",
+        "Server Manager Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 10,
+        "validade": "2025-08-20",
+        "cupom": "LINUX10"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Automação com Shell Script Linux",
+          "data": "2025-07-28",
+          "instrutor": "Elidiana Andrade"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "nome": "Formação Computação em Nuvem para Iniciantes",
+      "tecnologia": ["AWS", "Azure", "GCP", "Cloud Computing Fundamentals"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 6,
+      "xp_total": 8500,
+      "badges_disponiveis": [
+        "Cloud Explorer",
+        "Multi-Cloud Beginner",
+        "Cloud Fundamentals Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 0,
+        "validade": null,
+        "cupom": null
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "O que é computação em nuvem? Guia completo",
+          "data": "2025-07-13",
+          "instrutor": "Venilton FalvoJr"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "nome": "Formação Arquitetura de Soluções Cloud-Native",
+      "tecnologia": ["Service Mesh", "Istio", "ArgoCD", "Helm", "Prometheus", "Grafana"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 13,
+      "xp_total": 22500,
+      "badges_disponiveis": [
+        "Cloud-Native Architect",
+        "Istio Service Mesh Expert",
+        "GitOps with ArgoCD",
+        "Observability Pro",
+        "Helm Chart Master",
+        "SRE Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 30,
+        "validade": "2025-12-10",
+        "cupom": "CLOUDNATIVE30"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "GitOps na prática com ArgoCD",
+          "data": "2025-08-13",
+          "instrutor": "Sandeco Macedo"
+        },
+        {
+          "titulo": "Monitoramento com Prometheus e Grafana",
+          "data": "2025-09-24",
+          "instrutor": "Elidiana Andrade"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "nome": "Formação Rust para Sistemas de Alto Desempenho",
+      "tecnologia": ["Rust", "Actix Web", "Tokio", "WebAssembly", "Cargo"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 10,
+      "xp_total": 18000,
+      "badges_disponiveis": [
+        "Rust Developer",
+        "Systems Programmer",
+        "Actix Web Expert",
+        "WebAssembly Badge",
+        "Async Rust Pro"
+      ],
+      "promocoes": {
+        "desconto_percentual": 25,
+        "validade": "2025-11-25",
+        "cupom": "RUST25"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Introdução ao Rust: segurança de memória",
+          "data": "2025-07-21",
+          "instrutor": "Gleyson Sampaio"
+        },
+        {
+          "titulo": "APIs assíncronas com Actix Web e Tokio",
+          "data": "2025-09-08",
+          "instrutor": "Felipe Aguiar"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "nome": "Formação Inteligência Artificial Generativa e LLMs",
+      "tecnologia": ["Python", "LangChain", "OpenAI API", "Hugging Face", "Prompt Engineering", "RAG"],
+      "nivel": "Avançado",
+      "numero_de_modulos": 12,
+      "xp_total": 22000,
+      "badges_disponiveis": [
+        "Generative AI Practitioner",
+        "LLM Engineer",
+        "Prompt Engineering Expert",
+        "LangChain Developer",
+        "RAG Architect",
+        "AI Solutions Builder"
+      ],
+      "promocoes": {
+        "desconto_percentual": 45,
+        "validade": "2025-07-20",
+        "cupom": "GENAI45"
+      },
+      "vitalicio": true,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Construindo Chatbots com LangChain e OpenAI",
+          "data": "2025-07-12",
+          "instrutor": "Luciana Pinto"
+        },
+        {
+          "titulo": "RAG: Retrieval-Augmented Generation na prática",
+          "data": "2025-08-16",
+          "instrutor": "Sandeco Macedo"
+        },
+        {
+          "titulo": "Fine-tuning de LLMs com Hugging Face",
+          "data": "2025-09-26",
+          "instrutor": "Venilton FalvoJr"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "nome": "Formação TypeScript Profissional",
+      "tecnologia": ["TypeScript", "Node.js", "React", "Zod", "Vitest"],
+      "nivel": "Intermediário",
+      "numero_de_modulos": 8,
+      "xp_total": 12800,
+      "badges_disponiveis": [
+        "TypeScript Developer",
+        "Type-Safe Pro",
+        "Zod Validation Expert",
+        "TS Full Stack Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 15,
+        "validade": "2025-10-25",
+        "cupom": "TS15"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "TypeScript avançado: tipos, generics e utility types",
+          "data": "2025-08-03",
+          "instrutor": "Renan Johannsen"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "nome": "Formação Scrum Master e Agile Coach",
+      "tecnologia": ["Scrum", "Kanban", "SAFe", "Jira", "Confluence", "OKRs"],
+      "nivel": "Iniciante",
+      "numero_de_modulos": 6,
+      "xp_total": 9000,
+      "badges_disponiveis": [
+        "Scrum Master Certified",
+        "Agile Practitioner",
+        "Kanban Flow Expert",
+        "Agile Coach Badge"
+      ],
+      "promocoes": {
+        "desconto_percentual": 10,
+        "validade": "2025-09-05",
+        "cupom": "AGILE10"
+      },
+      "vitalicio": false,
+      "lives_ao_vivo": [
+        {
+          "titulo": "Gestão de produtos ágeis com Scrum na prática",
+          "data": "2025-08-15",
+          "instrutor": "Michele Ambrosio"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+================================================================================
+  RELATÓRIO DE TESTES UNITÁRIOS — DIO COMMANDS BOB
+  Projeto Final IBM Bob — Curso DIO
+  Data de execução: 06/10/2026
+  Ambiente: Python 3.13.13 | pytest 9.1.1 | pytest-cov 7.1.0 | Windows 10
+================================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. ARQUIVOS CRIADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Projeto Dio Explorer/src/dio_commands.py
+    Módulo principal com a lógica dos comandos:
+      - load_trilhas()                     Carrega trilhas do JSON
+      - buscar_trilhas_por_tecnologia()    Lógica do /trilha
+      - formatar_trilha()                  Formata saída markdown do /trilha
+      - comando_trilha()                   Ponto de entrada /trilha
+      - comando_desafio()                  Ponto de entrada /desafio
+      - formatar_desafio()                 Formata saída markdown do /desafio
+      - buscar_trilha_por_nome()           Busca auxiliar para /certificado
+      - comando_certificado()              Ponto de entrada /certificado
+      - formatar_certificado()             Formata saída markdown do /certificado
+      - gerar_codigo_certificado()         Helper: código alfanumérico aleatório
+      - gerar_codigo_desafio()             Helper: código de desafio
+
+  Projeto Dio Explorer/src/test_dio_commands.py
+    Arquivo de testes unitários cobrindo todos os comandos.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. RESULTADO DA EXECUÇÃO DOS TESTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Comando executado:
+    python -m pytest test_dio_commands.py -v --cov=dio_commands --cov-report=term-missing
+
+  ──────────────────────────────────────────────────────────────────────────────
+  Suíte                        Testes   Aprovados   Falhos   Status
+  ──────────────────────────────────────────────────────────────────────────────
+  TestLoadTrilhas                   3         3         0    PASSOU
+  TestBuscarTrilhasPorTecnologia    6         6         0    PASSOU
+  TestFormatarTrilha               10        10         0    PASSOU
+  TestComandoTrilha                 3         3         0    PASSOU
+  TestComandoDesafio                9         9         0    PASSOU
+  TestFormatarDesafio               3         3         0    PASSOU
+  TestBuscarTrilhaPorNome           4         4         0    PASSOU
+  TestComandoCertificado            8         8         0    PASSOU
+  TestFormatarCertificado           4         4         0    PASSOU
+  TestHelpers                       3         3         0    PASSOU
+  ──────────────────────────────────────────────────────────────────────────────
+  TOTAL                            53        53         0    53 passed in 0.17s
+  ──────────────────────────────────────────────────────────────────────────────
+
+  RESULTADO FINAL: 53 PASSOU | 0 FALHOU | 0 ERROS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. RELATÓRIO DE COBERTURA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Name              Stmts   Miss  Cover   Missing
+  -----------------------------------------------
+  dio_commands.py      91      1    99%   Linha 199 (import re — não utilizado)
+  -----------------------------------------------
+  TOTAL                91      1    99%
+
+  Meta exigida  : 70%
+  Cobertura real: 99%   ✅  SUPERADA EM +29 PONTOS PERCENTUAIS
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. SIMULAÇÃO DO FLUXO: /trilha Java
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Comando: /trilha Java
+  Resultado: 1 trilha encontrada — "Formação Full Stack Java + Angular"
+
+  ── Saída gerada ──────────────────────────────────────────────────────────────
+
+  ## 🎓 Formação Full Stack Java + Angular
+
+  | Campo      | Detalhe          |
+  |------------|------------------|
+  | Nível      | Intermediário    |
+  | Módulos    | 12 módulos       |
+  | XP Total   | 18500 XP         |
+  | Vitalício  | Sim              |
+
+  Tecnologias: Java | Spring Boot | Angular | TypeScript | PostgreSQL
+
+  Plano de Estudos:
+    1. Módulo 1: Tópico avançado de Java
+    2. Módulo 2: Tópico avançado de Spring Boot
+    3. Módulo 3: Tópico avançado de Angular
+    4. Módulo 4: Tópico avançado de TypeScript
+    5. Módulo 5: Tópico avançado de PostgreSQL
+    ...até o Módulo 12
+
+  Badges: Java Developer | Spring Boot Expert | Angular Professional |
+          Full Stack Badge | API REST Master
+
+  Live: "Construindo uma API REST com Spring Boot" — 2025-07-10 | Gleyson Sampaio
+
+  Promoção: 30% de desconto com cupom FULLSTACK30 — válido até 2025-12-31
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. SIMULAÇÃO DO FLUXO: /desafio Java intermediario
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Comando: /desafio Java intermediario
+  Parâmetros: Tecnologia=Java | Nível=intermediario
+
+  ── Saída gerada ──────────────────────────────────────────────────────────────
+
+  ## ⚔️ Desafio de Código — DIO Challenge
+
+  > Tecnologia: Java | Nível: intermediario
+
+  ### Descrição do Desafio
+  Implemente um sistema de fila de prioridade para gerenciar tickets de suporte,
+  ordenando por urgência (1-crítico, 2-alto, 3-baixo).
+
+  ### Recompensa
+  - XP ao completar: 1000 XP
+  - Badge desbloqueável: "Java Intermediario Challenger"
+
+  ### Código do Desafio
+  CHALLENGE-1000-ORI9QM
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. SIMULAÇÃO DO FLUXO: /certificado Davi Aluno Java
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Comando: /certificado "Davi Aluno" "Java"
+  Trilha encontrada: Formação Full Stack Java + Angular
+
+  ── Saída gerada ──────────────────────────────────────────────────────────────
+
+  ## 📜 CERTIFICADO DE CONCLUSÃO
+
+  Aluno(a)         : Davi Aluno
+  Trilha           : Formação Full Stack Java + Angular
+  Nível            : Intermediário
+  Módulos Concluídos: 12
+  XP Conquistado   : 18500 XP
+  Data             : 06/10/2026
+  Código           : DIO-2026-ST0C40ES
+
+  Competências Adquiridas:
+    - Java       — Competência adquirida em Java
+    - Spring Boot — Competência adquirida em Spring Boot
+    - Angular    — Competência adquirida em Angular
+    - TypeScript — Competência adquirida em TypeScript
+    - PostgreSQL — Competência adquirida em PostgreSQL
+
+  Badges Conquistadas:
+    Java Developer | Spring Boot Expert | Angular Professional |
+    Full Stack Badge | API REST Master
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. RESUMO FINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Total de testes criados    :  53
+  Total de testes aprovados  :  53  (100%)
+  Total de testes reprovados :   0
+  Cobertura de código        :  99%  (meta: 70%)  ✅ APROVADO
+
+  Comandos testados:
+    /trilha      [OK] — busca Java, case-insensitive, parcial, nao encontrado
+    /desafio     [OK] — todos os níveis, nível inválido, badge, XP, unicidade
+    /certificado [OK] — trilha encontrada, não encontrada, validações, formato
+
+  Status do projeto: TODOS OS FLUXOS VALIDADOS COM SUCESSO ✅
+
+================================================================================
+  Gerado por: IBM Bob — Assistente de Desenvolvimento
+  Repositório: Projeto-final-IBM_bob-curso-DIO
+================================================================================
